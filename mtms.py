@@ -37,7 +37,7 @@ ponto3_mean = int(np.mean(df['ponto3']))
 ponto4_mean = int(np.mean(df['ponto4']))
 chegada_mean = int(np.mean(df['chegada']))
 
-tempo_viagem = (chegada_mean - saida_mean)
+tempo_viagem = round((chegada_mean - saida_mean))
 tempo_viagem = timedelta(seconds = tempo_viagem)
 
 horario_destino = input('Qual horário você precisa chegar no seu destino?\n')
@@ -48,3 +48,4 @@ hora_destino = timedelta(hours=hora_destino, minutes=minuto_destino)
 
 hora_saida = hora_destino - tempo_viagem
 print(hora_saida)
+print(tempo_viagem)
