@@ -1,19 +1,22 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 import generator
+import os
+from dotenv import load_dotenv
 
 # Conexão com o DB
-usuario = 'root'
-senha = ''
-host = 'localhost'
-porta = 3306
-banco = 'Horas'
+load_dotenv()
+usuario = os.getenv("usuario")
+senha = os.getenv("senha")
+host = os.getenv("host")
+porta = os.getenv("porta")
+banco = os.getenv("banco")
 engine = create_engine(f'mysql+pymysql://{usuario}:{senha}@{host}:{porta}/{banco}')
 
 # Pegando as informações de horário
 lista = []
 
-for i in range(6):
+for i in range(2):
     horas = input()
     lista.append(horas)
 
@@ -21,11 +24,7 @@ for i in range(6):
 
 novo_horario = generator.horarios(
     saida = lista[0],
-    ponto1 = lista[1],
-    ponto2 = lista[2],
-    ponto3 = lista[3],
-    ponto4 = lista[4],
-    chegada = lista[5]
+    chegada = lista[1]
 )
 
 Session = sessionmaker(bind=engine)
