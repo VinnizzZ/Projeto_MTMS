@@ -29,3 +29,6 @@ Base.metadata.create_all(engine)
 # Criar sessão
 Session = sessionmaker(bind=engine)
 session = Session()
+
+session.commit()
+session.close()

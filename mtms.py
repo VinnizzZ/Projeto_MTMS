@@ -40,12 +40,28 @@ chegada_mean = int(np.mean(df['chegada']))
 tempo_viagem = round((chegada_mean - saida_mean))
 tempo_viagem = timedelta(seconds = tempo_viagem)
 
-horario_destino = input('Qual horário você precisa chegar no seu destino?\n')
-hora_destino, minuto_destino = horario_destino.split(':')
-hora_destino = int(hora_destino)
-minuto_destino = int(minuto_destino)
-hora_destino = timedelta(hours=hora_destino, minutes=minuto_destino)
+tipo_calculo = input('Calculo de saida ou destino? S/D\n')
 
-hora_saida = hora_destino - tempo_viagem
-print(hora_saida)
-print(tempo_viagem)
+match tipo_calculo.lower():
+    case 's':
+        horario_destino = input('Qual horário você precisa chegar no seu destino?\n')
+        hora_destino, minuto_destino = horario_destino.split(':')
+        hora_destino = int(hora_destino)
+        minuto_destino = int(minuto_destino)
+        hora_destino = timedelta(hours=hora_destino, minutes=minuto_destino)
+        hora_saida = hora_destino - tempo_viagem
+        print(hora_saida)
+        print(tempo_viagem)
+
+    case 'd':
+        horario_saida = input('Qual horário você vai sair?\n')
+        hora_saida, minuto_saida = horario_saida.split(':')
+        hora_saida = int(hora_saida)
+        minuto_saida = int(minuto_saida)
+        hora_saida = timedelta(hours=hora_saida, minutes=minuto_saida)
+        hora_saida = hora_saida + tempo_viagem
+        print(hora_saida)
+        print(tempo_viagem)
+
+    case _:
+        print('Entrada invalida, digite S ou D')
