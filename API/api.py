@@ -17,6 +17,7 @@ banco = os.getenv("banco")
 engine = create_engine(f'mysql+pymysql://{usuario}:{senha}@{host}:{porta}/{banco}')
 
 dados = []
+nextId = 0
 
 app = Flask(__name__)
 
@@ -62,7 +63,7 @@ def create_chegada():
     if not data_is_valid(dado):
         return jsonify({ 'erro': 'propriedades inválidas.' }), 400
     
-    # Calculo do horario de saída
+    # Calculo do horario de chegada
     horario_chegada = mtms.calcularChegada(dado['horario'], dado['tempo_viagem'])
 
     dado['id'] = nextId
